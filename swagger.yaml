@@ -1,0 +1,42 @@
+basePath: /
+consumes:
+- application/json
+definitions:
+  Branch:
+    description: Branch represents a delivery location
+    properties:
+      address:
+        type: string
+        x-go-name: Address
+      branchID:
+        format: int64
+        type: integer
+        x-go-name: BranchID
+      latitude:
+        format: float
+        type: number
+        x-go-name: Latitude
+      longitude:
+        format: float
+        type: number
+        x-go-name: Longitude
+    type: object
+    x-go-package: github.com/miguelapabenedit/fravega-challange/branch
+host: localhost:5000/api
+info:
+  contact:
+    email: miguell.beneditt@gmail.com
+  description: Documentation of our awesome API.
+  title: awesome.
+  version: 1.0.0
+paths: {}
+produces:
+- application/json
+responses:
+  branchGetResponse:
+    description: A BranchResponse is a response that contains a branch data
+    schema:
+      $ref: '#/definitions/Branch'
+schemes:
+- http
+swagger: "2.0"
