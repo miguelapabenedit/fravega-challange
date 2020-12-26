@@ -12,10 +12,5 @@
 //
 //     Produces:
 //     - application/json
-//
-//     Security:
-//     - basic
-//
-//
 // swagger:meta
 package docs

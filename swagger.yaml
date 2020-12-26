@@ -24,17 +24,47 @@ definitions:
     x-go-package: github.com/miguelapabenedit/fravega-challange/branch
 host: localhost:5000/api
 info:
-  contact:
-    email: miguell.beneditt@gmail.com
   description: Documentation of our awesome API.
   title: awesome.
   version: 1.0.0
-paths: {}
+paths:
+  /branch:
+    post:
+      description: Creates a new branch
+      operationId: branchParams
+      parameters:
+      - description: required
+        in: body
+        name: Body
+        schema:
+          $ref: '#/definitions/Branch'
+      responses:
+        "200":
+          $ref: '#/responses/branchResponse'
+        "400":
+          $ref: '#/responses/http.BadRequest'
+  /branch/{branchID}:
+    get:
+      description: Gets a branch base on an branchId
+      operationId: branchId
+      parameters:
+      - description: required
+        format: int32
+        in: path
+        name: branchID
+        required: true
+        type: integer
+        x-go-name: BranchID
+      responses:
+        "200":
+          $ref: '#/responses/branchResponse'
+        "400":
+          $ref: '#/responses/http.BadRequest'
 produces:
 - application/json
 responses:
-  branchGetResponse:
-    description: A BranchResponse is a response that contains a branch data
+  branchResponse:
+    description: ""
     schema:
       $ref: '#/definitions/Branch'
 schemes:
