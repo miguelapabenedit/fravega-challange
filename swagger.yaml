@@ -22,13 +22,34 @@ definitions:
         x-go-name: Longitude
     type: object
     x-go-package: github.com/miguelapabenedit/fravega-challange/branch
-host: localhost:5000/api
+host: localhost:5000/api/v1
 info:
   description: Documentation of our awesome API.
   title: awesome.
   version: 1.0.0
 paths:
   /branch:
+    get:
+      description: Gets the nearest branch for deliver base on a position
+      operationId: currentPosition
+      parameters:
+      - description: required
+        format: float
+        in: query
+        name: latitude
+        type: number
+        x-go-name: Latitude
+      - description: required
+        format: float
+        in: query
+        name: longitude
+        type: number
+        x-go-name: Longitude
+      responses:
+        "200":
+          $ref: '#/responses/branchResponse'
+        "400":
+          $ref: '#/responses/http.BadRequest'
     post:
       description: Creates a new branch
       operationId: branchParams
@@ -40,9 +61,9 @@ paths:
           $ref: '#/definitions/Branch'
       responses:
         "200":
-          $ref: '#/responses/branchResponse'
+          description: ""
         "400":
-          $ref: '#/responses/http.BadRequest'
+          description: ""
   /branch/{branchID}:
     get:
       description: Gets a branch base on an branchId

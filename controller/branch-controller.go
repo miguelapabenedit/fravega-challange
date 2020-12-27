@@ -1,4 +1,4 @@
-package branch
+package controller
 
 import (
 	"encoding/json"
@@ -7,18 +7,23 @@ import (
 	"net/http"
 	"strconv"
 	"strings"
+
+	"github.com/miguelapabenedit/fravega-challange/entity"
+	"github.com/miguelapabenedit/fravega-challange/service"
 )
 
 const branchBasePath = "/branch"
 
+var serv service.Service
+
 /*SetUpRoutes registers the handlers of the service with the given an apiBasePath string*/
-func SetUpRoutes(apiBasePath string) {
+func SetUpRoutes(apiBasePath string, service service.Service) {
+	serv = service
 	handleBranch := http.HandlerFunc(branchHandler)
 	handleBranches := http.HandlerFunc(branchesHandler)
 	fmt.Print(branchBasePath)
 	http.Handle(fmt.Sprintf("%s%s/", apiBasePath, branchBasePath), handleBranch)
 	http.Handle(fmt.Sprintf("%s%s", apiBasePath, branchBasePath), handleBranches)
-
 }
 
 func branchHandler(w http.ResponseWriter, r *http.Request) {
@@ -30,7 +35,7 @@ func branchHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	branch, err := getBranch(branchID)
+	branch, err := serv.GetBranch(branchID)
 
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
@@ -73,21 +78,21 @@ func branchesHandler(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 
-		latitude, err := strconv.ParseFloat(latitudeForm, 64)
+		latitude, err := strconv.ParseFloat(latitudeForm, 32)
 
 		if err != nil {
 			w.WriteHeader(http.StatusBadRequest)
 			return
 		}
 
-		longitude, err := strconv.ParseFloat(longitudeForm, 64)
+		longitude, err := strconv.ParseFloat(longitudeForm, 32)
 
 		if err != nil {
 			w.WriteHeader(http.StatusBadRequest)
 			return
 		}
 
-		branch, err := getNearestBranch(latitude, longitude)
+		branch, err := serv.GetNearestBranch(float32(latitude), float32(longitude))
 
 		if err != nil {
 			w.WriteHeader(http.StatusInternalServerError)
@@ -105,7 +110,7 @@ func branchesHandler(w http.ResponseWriter, r *http.Request) {
 		w.Write(branchJSON)
 		return
 	case http.MethodPost:
-		var newBranch Branch
+		var newBranch entity.Branch
 		bodyBytes, err := ioutil.ReadAll(r.Body)
 
 		if err != nil {
@@ -124,7 +129,7 @@ func branchesHandler(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 
-		err = insertBranch(&newBranch)
+		err = serv.SaveBranch(&newBranch)
 
 		if err != nil {
 			w.WriteHeader(http.StatusInternalServerError)

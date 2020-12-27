@@ -1,19 +1,43 @@
-package branch
+package infrastructure
 
 import (
 	"context"
 	"database/sql"
+	"fmt"
 	"log"
 	"time"
 
-	"github.com/miguelapabenedit/fravega-challange/database"
+	"github.com/miguelapabenedit/fravega-challange/entity"
 )
 
-func getBranch(branchID int) (*Branch, error) {
+var dbConn *sql.DB
+var server = "localhost"
+var port = 1434
+var password = "go123"
+var user = "go"
+var database = "FravegaChallange"
+
+type repo struct{}
+
+func NewSQLRepository() Repository {
+	var err error
+	cs := fmt.Sprintf("server=%s;user id=%s;password=%s;port=%d;database=%s", server, user, password, port, database)
+	dbConn, err = sql.Open("sqlserver", cs)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	dbConn.SetMaxOpenConns(4)
+	dbConn.SetConnMaxLifetime(60 * time.Second)
+
+	return &repo{}
+}
+
+func (*repo) GetBranch(branchID int) (*entity.Branch, error) {
 	ctx, cancel := context.WithTimeout(context.Background(), 3*time.Second)
 	defer cancel()
 
-	row := database.DbConn.QueryRowContext(ctx, `SELECT 
+	row := dbConn.QueryRowContext(ctx, `SELECT 
 	branchId, 
 	address, 
 	latitude, 
@@ -21,7 +45,7 @@ func getBranch(branchID int) (*Branch, error) {
 	FROM Branches 
 	WHERE branchId = @p1`, branchID)
 
-	branch := &Branch{}
+	branch := &entity.Branch{}
 	err := row.Scan(
 		&branch.BranchID,
 		&branch.Address,
@@ -39,11 +63,11 @@ func getBranch(branchID int) (*Branch, error) {
 	return branch, nil
 }
 
-func getNearestBranch(latitude float64, longitude float64) (*Branch, error) {
+func (*repo) GetNearestBranch(latitude float32, longitude float32) (*entity.Branch, error) {
 	ctx, cancel := context.WithTimeout(context.Background(), 3*time.Second)
 	defer cancel()
 
-	row := database.DbConn.QueryRowContext(ctx, `SELECT TOP 1 
+	row := dbConn.QueryRowContext(ctx, `SELECT TOP 1 
 		BranchID,
 		Address,
 		Latitude,
@@ -55,9 +79,9 @@ func getNearestBranch(latitude float64, longitude float64) (*Branch, error) {
 		latitude,
 		longitude)
 
-	branch := &Branch{}
+	branch := &entity.Branch{}
 
-	var distance float64
+	var distance float32
 	err := row.Scan(
 		&branch.BranchID,
 		&branch.Address,
@@ -76,8 +100,8 @@ func getNearestBranch(latitude float64, longitude float64) (*Branch, error) {
 	return branch, nil
 }
 
-func insertBranch(branch *Branch) error {
-	_, err := database.DbConn.Exec(`INSERT INTO Branches
+func (*repo) SaveBranch(branch *entity.Branch) error {
+	_, err := dbConn.Exec(`INSERT INTO Branches
 	(address,
 	latitude,
 	longitude

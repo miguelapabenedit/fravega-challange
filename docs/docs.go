@@ -5,7 +5,7 @@
 //     Schemes: http
 //     BasePath: /
 //     Version: 1.0.0
-//     Host: localhost:5000/api
+//     Host: localhost:5000/api/v1
 //
 //     Consumes:
 //     - application/json

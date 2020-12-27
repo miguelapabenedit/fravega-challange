@@ -1,6 +1,6 @@
 package docs
 
-import "github.com/miguelapabenedit/fravega-challange/branch"
+import "github.com/miguelapabenedit/fravega-challange/entity"
 
 // Package service thats provides creation and branches near by
 //
@@ -22,19 +22,25 @@ import "github.com/miguelapabenedit/fravega-challange/branch"
 // Gets a branch base on an branchId
 // responses:
 // 200: branchResponse
-// 400: http.BadRequest
+// 400:
+
+// swagger:route GET /branch currentPosition
+// Gets the nearest branch for deliver base on a position
+// responses:
+// 200: branchResponse
+// 400:
 
 // swagger:route Post /branch branchParams
 // Creates a new branch
 // responses:
-// 200: branchResponse
-// 400: http.BadRequest
+// 200:
+// 400:
 
+// BranchResponseWrapper is a response that contains a branch data
 // swagger:response branchResponse
 type BranchResponseWrapper struct {
-	// BranchResponseWrapper is a response that contains a branch data
 	// in:body
-	Body branch.Branch
+	Body entity.Branch
 }
 
 // BranchParamsWrapper holds the structure to create or update a branch
@@ -42,7 +48,7 @@ type BranchResponseWrapper struct {
 type BranchParamsWrapper struct {
 	// required
 	// in: body
-	Body branch.Branch
+	Body entity.Branch
 }
 
 // GetBranchParamsWrapper holds the params needs to get a branch by id
@@ -51,4 +57,14 @@ type GetBranchParamsWrapper struct {
 	// required
 	// in: path
 	BranchID int32 `json:"branchID"`
+}
+
+// CurrentPositionParamsWrapper holds a current position
+// swagger:parameters currentPosition
+type CurrentPositionParamsWrapper struct {
+	// required
+	// in: query
+	Latitude float32 `json:"latitude"`
+	// required
+	Longitude float32 `json:"longitude"`
 }
