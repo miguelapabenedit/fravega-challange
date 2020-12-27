@@ -9,12 +9,6 @@ import (
 
 type service struct{}
 
-type Service interface {
-	GetBranch(branchID int) (*entity.Branch, error)
-	GetNearestDeliver(latitude float32, longitude float32) (*entity.Branch, error)
-	SaveBranch(branch *entity.Branch) error
-}
-
 var repo infrastructure.Repository
 
 func NewBranchService(repository infrastructure.Repository) Service {

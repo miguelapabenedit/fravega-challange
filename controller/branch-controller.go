@@ -15,12 +15,6 @@ var serv service.Service
 
 type controller struct{}
 
-type Controller interface {
-	Get(w http.ResponseWriter, r *http.Request)
-	Post(w http.ResponseWriter, r *http.Request)
-	GetNearestDeliver(w http.ResponseWriter, r *http.Request)
-}
-
 func NewBranchController(service service.Service) Controller {
 	serv = service
 	return &controller{}
