@@ -5,6 +5,6 @@ package branch
 type Branch struct {
 	BranchID  int     `json:"branchID"`
 	Address   string  `json:"address"`
-	Latitude  float32 `json:"latitude"`
-	Longitude float32 `json:"longitude"`
+	Latitude  float64 `json:"latitude"`
+	Longitude float64 `json:"longitude"`
 }
