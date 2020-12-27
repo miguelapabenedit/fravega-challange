@@ -11,7 +11,7 @@ type service struct{}
 
 type Service interface {
 	GetBranch(branchID int) (*entity.Branch, error)
-	GetNearestBranch(latitude float32, longitude float32) (*entity.Branch, error)
+	GetNearestDeliver(latitude float32, longitude float32) (*entity.Branch, error)
 	SaveBranch(branch *entity.Branch) error
 }
 
@@ -33,8 +33,8 @@ func (*service) GetBranch(branchID int) (*entity.Branch, error) {
 	return branch, nil
 }
 
-func (*service) GetNearestBranch(latitude float32, longitude float32) (*entity.Branch, error) {
-	branch, err := repo.GetNearestBranch(latitude, longitude)
+func (*service) GetNearestDeliver(latitude float32, longitude float32) (*entity.Branch, error) {
+	branch, err := repo.GetNearestDeliver(latitude, longitude)
 
 	if err != nil {
 		log.Println(err)

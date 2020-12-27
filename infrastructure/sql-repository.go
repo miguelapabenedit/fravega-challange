@@ -63,7 +63,7 @@ func (*repo) GetBranch(branchID int) (*entity.Branch, error) {
 	return branch, nil
 }
 
-func (*repo) GetNearestBranch(latitude float32, longitude float32) (*entity.Branch, error) {
+func (*repo) GetNearestDeliver(latitude float32, longitude float32) (*entity.Branch, error) {
 	ctx, cancel := context.WithTimeout(context.Background(), 3*time.Second)
 	defer cancel()
 
