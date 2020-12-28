@@ -1,6 +1,7 @@
 package service
 
 import (
+	"fmt"
 	"log"
 
 	"github.com/miguelapabenedit/fravega-challange/entity"
@@ -8,12 +9,6 @@ import (
 )
 
 type service struct{}
-
-type Service interface {
-	GetBranch(branchID int) (*entity.Branch, error)
-	GetNearestBranch(latitude float32, longitude float32) (*entity.Branch, error)
-	SaveBranch(branch *entity.Branch) error
-}
 
 var repo infrastructure.Repository
 
@@ -33,8 +28,9 @@ func (*service) GetBranch(branchID int) (*entity.Branch, error) {
 	return branch, nil
 }
 
-func (*service) GetNearestBranch(latitude float32, longitude float32) (*entity.Branch, error) {
-	branch, err := repo.GetNearestBranch(latitude, longitude)
+func (*service) GetNearestDeliver(latitude float32, longitude float32) (*entity.Branch, error) {
+
+	branch, err := repo.GetNearestDeliver(latitude, longitude)
 
 	if err != nil {
 		log.Println(err)
@@ -44,7 +40,20 @@ func (*service) GetNearestBranch(latitude float32, longitude float32) (*entity.B
 	return branch, nil
 }
 
-func (*service) SaveBranch(branch *entity.Branch) error {
+func (*service) AddBranch(branch *entity.Branch) error {
+
+	if branch == nil {
+		return fmt.Errorf("The branch can't be empty")
+	}
+
+	if branch.BranchID != 0 {
+		return fmt.Errorf("The Id must be 0")
+	}
+
+	if branch.Address == "" {
+		return fmt.Errorf("Address cant be empty")
+	}
+
 	err := repo.SaveBranch(branch)
 
 	if err != nil {
