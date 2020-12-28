@@ -115,7 +115,7 @@ func (*controller) Post(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	err = serv.SaveBranch(&newBranch)
+	err = serv.AddBranch(&newBranch)
 
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)

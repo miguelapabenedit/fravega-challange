@@ -16,7 +16,6 @@ import (
 const (
 	apiBasePath    = "/api"
 	branchBasePath = "/branch"
-	port           = ":5000"
 )
 
 var (
@@ -31,6 +30,7 @@ func main() {
 	r.HandleFunc(fmt.Sprintf("%s%s/{id}", apiBasePath, branchBasePath), branchController.Get).Methods("GET")
 	r.HandleFunc(fmt.Sprintf("%s%s", apiBasePath, branchBasePath), branchController.Post).Methods("POST")
 
+	port := ":5000"
 	log.Println("Server listening on port", port)
 	log.Fatalln(http.ListenAndServe(port, r))
 }
