@@ -1,0 +1,115 @@
+basePath: /api
+definitions:
+  entity.Branch:
+    properties:
+      address:
+        type: string
+      branchID:
+        type: integer
+      latitude:
+        type: number
+      longitude:
+        type: number
+    type: object
+host: localhost:5000
+info:
+  contact:
+    email: miguell.beneditt@gmail.com
+    name: API Support
+  description: This api serves for creation and retrieve of branches and other functionalities
+  title: Fravega Challange Deliver API
+  version: "1.0"
+paths:
+  /branch:
+    post:
+      consumes:
+      - application/json
+      description: Get the nearest deliver branch base on a position(latitude and
+        longitude)
+      operationId: post-branch
+      parameters:
+      - description: Branch
+        in: body
+        name: branch
+        required: true
+        schema:
+          $ref: '#/definitions/entity.Branch'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/entity.Branch'
+        "400":
+          description: ""
+        "404":
+          description: ""
+        "500":
+          description: ""
+      summary: Creates a new branch
+      tags:
+      - branch
+  /branch/{id}:
+    get:
+      consumes:
+      - application/json
+      description: Gets a branch base on an branchId
+      operationId: get-string-by-int
+      parameters:
+      - description: Branch ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/entity.Branch'
+        "400":
+          description: ""
+        "404":
+          description: ""
+        "500":
+          description: ""
+      summary: Get a branch
+      tags:
+      - branch
+  /branch/getNearestDeliver:
+    get:
+      consumes:
+      - application/json
+      description: Get the nearest deliver branch base on a position(latitude and
+        longitude)
+      operationId: get-nearest-branch
+      parameters:
+      - description: Latitude
+        in: query
+        name: latitude
+        required: true
+        type: number
+      - description: Longitude
+        in: query
+        name: longitude
+        required: true
+        type: number
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/entity.Branch'
+        "400":
+          description: ""
+        "404":
+          description: ""
+        "500":
+          description: ""
+      summary: Get the nearest deliver
+      tags:
+      - branch
+swagger: "2.0"

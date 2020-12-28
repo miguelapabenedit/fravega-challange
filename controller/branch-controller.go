@@ -20,6 +20,18 @@ func NewBranchController(service service.Service) Controller {
 	return &controller{}
 }
 
+// GetBranch godoc
+// @Summary Get a branch
+// @ID get-string-by-int
+// @Description Gets a branch base on an branchId
+// @Tags branch
+// @Accept json
+// @Produce  json
+// @Param id path int true "Branch ID"
+// @Success 200 {object} entity.Branch
+// @Failure 400,404
+// @Failure 500
+// @Router /branch/{id} [get]
 func (*controller) Get(w http.ResponseWriter, r *http.Request) {
 	urlPathSegment := strings.Split(r.URL.Path, "/")
 	branchID, err := strconv.Atoi(urlPathSegment[len(urlPathSegment)-1])
@@ -53,6 +65,19 @@ func (*controller) Get(w http.ResponseWriter, r *http.Request) {
 	return
 }
 
+// GetNearestDeliver godoc
+// @Summary Get the nearest deliver
+// @ID get-nearest-branch
+// @Description Get the nearest deliver branch base on a position(latitude and longitude)
+// @Tags branch
+// @Accept json
+// @Produce  json
+// @Param latitude query number  true "Latitude"
+// @Param longitude query number  true "Longitude"
+// @Success 200 {object} entity.Branch
+// @Failure 400,404
+// @Failure 500
+// @Router /branch/getNearestDeliver [get]
 func (*controller) GetNearestDeliver(w http.ResponseWriter, r *http.Request) {
 	latitudeForm := r.FormValue("latitude")
 	longitudeForm := r.FormValue("longitude")
@@ -95,6 +120,18 @@ func (*controller) GetNearestDeliver(w http.ResponseWriter, r *http.Request) {
 	return
 }
 
+// Post godoc
+// @Summary Creates a new branch
+// @ID post-branch
+// @Description Get the nearest deliver branch base on a position(latitude and longitude)
+// @Tags branch
+// @Accept json
+// @Produce  json
+// @Param branch body entity.Branch true "Branch"
+// @Success 200 {object} entity.Branch
+// @Failure 400,404
+// @Failure 500
+// @Router /branch [post]
 func (*controller) Post(w http.ResponseWriter, r *http.Request) {
 	var newBranch entity.Branch
 	bodyBytes, err := ioutil.ReadAll(r.Body)
