@@ -1,0 +1,18 @@
+version: "3"
+
+services:
+  webapi-fravega:
+    image: golang-api 
+    container_name: golang-api
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    ports:
+      - 8080:5000
+    environment:
+      API_PORT: ":5000"
+      DB_SERVER: "localhost"
+      DB_PORT: 1434
+      DB_PASS: "go123"
+      DB_USER: "go"
+      DB_NAME: "FravegaChallange"
