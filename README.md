@@ -47,5 +47,5 @@ http://localhost:8080/swagger/index.html
  
  ## Agradecimientos
  1. Gracias a [Federico Alonso Alomá](https://www.linkedin.com/in/federico-alonso-aloma/) por el challange y el contacto
- 2. Gracias a la persona de IT que dedique tiempo en leer mi codigo este fragmento de código y en especial si tiene feedback sobre el mismo.
+ 2. Gracias a la persona de IT que dedique tiempo en leer este fragmento de código y en especial si tiene feedback sobre el mismo.
  3. Gracias a [Rodrigo Auche](https://www.linkedin.com/in/rodrigoauche/) que me ayudo con un blockeo que tuve con Docker.
