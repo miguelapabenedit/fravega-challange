@@ -22,6 +22,8 @@ var (
 
 type repo struct{}
 
+/*NewSQLRepository constructor that initiates a sql connection
+ */
 func NewSQLRepository() Repository {
 	var err error
 
@@ -29,7 +31,7 @@ func NewSQLRepository() Repository {
 	dbConn, err = sql.Open("sqlserver", cs)
 
 	if err != nil {
-		log.Fatal(err)
+		log.Println(err)
 	}
 
 	dbConn.SetMaxOpenConns(4)

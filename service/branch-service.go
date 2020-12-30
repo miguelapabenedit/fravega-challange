@@ -2,7 +2,6 @@ package service
 
 import (
 	"fmt"
-	"log"
 
 	"github.com/miguelapabenedit/fravega-challange/entity"
 	"github.com/miguelapabenedit/fravega-challange/infrastructure"
@@ -21,7 +20,6 @@ func (*service) GetBranch(branchID int) (*entity.Branch, error) {
 	branch, err := repo.GetBranch(branchID)
 
 	if err != nil {
-		log.Println(err)
 		return nil, err
 	}
 
@@ -33,7 +31,6 @@ func (*service) GetNearestDeliver(latitude float32, longitude float32) (*entity.
 	branch, err := repo.GetNearestDeliver(latitude, longitude)
 
 	if err != nil {
-		log.Println(err)
 		return nil, err
 	}
 
@@ -57,7 +54,6 @@ func (*service) AddBranch(branch *entity.Branch) error {
 	err := repo.SaveBranch(branch)
 
 	if err != nil {
-		log.Println(err)
 		return err
 	}
 

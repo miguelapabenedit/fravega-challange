@@ -12,3 +12,4 @@ COPY . .
 RUN go build
 
 CMD ["./fravega-challange"]
+

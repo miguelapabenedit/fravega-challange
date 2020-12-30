@@ -32,7 +32,7 @@ var (
 // @description This api serves for creation and retrieve of branches and other functionalities
 // @contact.name API Support
 // @contact.email miguell.beneditt@gmail.com
-// @host localhost:5000
+// @host localhost:8080
 // @BasePath /api
 func main() {
 	r := mux.NewRouter()
@@ -41,6 +41,6 @@ func main() {
 	r.HandleFunc(fmt.Sprintf("%s%s", apiBasePath, branchBasePath), branchController.Post).Methods("POST")
 	r.PathPrefix("/swagger").Handler(httpSwagger.WrapHandler)
 
-	log.Println("Server listening on port", port)
+	log.Println("Server listening on port", os.Getenv("API_DOCKER_PORT"))
 	log.Fatalln(http.ListenAndServe(port, r))
 }

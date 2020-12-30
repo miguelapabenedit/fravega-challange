@@ -3,6 +3,7 @@ package controller
 import (
 	"encoding/json"
 	"io/ioutil"
+	"log"
 	"net/http"
 	"strconv"
 	"strings"
@@ -29,26 +30,30 @@ func NewBranchController(service service.Service) Controller {
 // @Produce  json
 // @Param id path int true "Branch ID"
 // @Success 200 {object} entity.Branch
-// @Failure 400,404
-// @Failure 500
+// @Failure 400,404 {object} http.Response
+// @Failure 500 {object} http.Response
 // @Router /branch/{id} [get]
 func (*controller) Get(w http.ResponseWriter, r *http.Request) {
 	urlPathSegment := strings.Split(r.URL.Path, "/")
 	branchID, err := strconv.Atoi(urlPathSegment[len(urlPathSegment)-1])
 
 	if err != nil || branchID <= 0 {
+		log.Println(err)
 		w.WriteHeader(http.StatusBadRequest)
+
 		return
 	}
 
 	branch, err := serv.GetBranch(branchID)
 
 	if err != nil {
+		log.Println(err)
 		w.WriteHeader(http.StatusInternalServerError)
 		return
 	}
 
 	if branch == nil {
+		log.Println(err)
 		w.WriteHeader(http.StatusNotFound)
 		return
 	}
@@ -56,6 +61,7 @@ func (*controller) Get(w http.ResponseWriter, r *http.Request) {
 	branchJSON, err := json.Marshal(&branch)
 
 	if err != nil {
+		log.Println(err)
 		w.WriteHeader(http.StatusInternalServerError)
 		return
 	}
@@ -75,8 +81,8 @@ func (*controller) Get(w http.ResponseWriter, r *http.Request) {
 // @Param latitude query number  true "Latitude"
 // @Param longitude query number  true "Longitude"
 // @Success 200 {object} entity.Branch
-// @Failure 400,404
-// @Failure 500
+// @Failure 400,404 {object} http.Response
+// @Failure 500 {object} http.Response
 // @Router /branch/getNearestDeliver [get]
 func (*controller) GetNearestDeliver(w http.ResponseWriter, r *http.Request) {
 	latitudeForm := r.FormValue("latitude")
@@ -90,6 +96,7 @@ func (*controller) GetNearestDeliver(w http.ResponseWriter, r *http.Request) {
 	latitude, err := strconv.ParseFloat(latitudeForm, 32)
 
 	if err != nil {
+		log.Println(err)
 		w.WriteHeader(http.StatusBadRequest)
 		return
 	}
@@ -97,6 +104,7 @@ func (*controller) GetNearestDeliver(w http.ResponseWriter, r *http.Request) {
 	longitude, err := strconv.ParseFloat(longitudeForm, 32)
 
 	if err != nil {
+		log.Println(err)
 		w.WriteHeader(http.StatusBadRequest)
 		return
 	}
@@ -104,6 +112,7 @@ func (*controller) GetNearestDeliver(w http.ResponseWriter, r *http.Request) {
 	branch, err := serv.GetNearestDeliver(float32(latitude), float32(longitude))
 
 	if err != nil {
+		log.Println(err)
 		w.WriteHeader(http.StatusInternalServerError)
 		return
 	}
@@ -111,6 +120,7 @@ func (*controller) GetNearestDeliver(w http.ResponseWriter, r *http.Request) {
 	branchJSON, err := json.Marshal(&branch)
 
 	if err != nil {
+		log.Println(err)
 		w.WriteHeader(http.StatusInternalServerError)
 		return
 	}
@@ -129,25 +139,28 @@ func (*controller) GetNearestDeliver(w http.ResponseWriter, r *http.Request) {
 // @Produce  json
 // @Param branch body entity.Branch true "Branch"
 // @Success 200 {object} entity.Branch
-// @Failure 400,404
-// @Failure 500
+// @Failure 400,404 {object} http.Response
+// @Failure 500 {object} http.Response
 // @Router /branch [post]
 func (*controller) Post(w http.ResponseWriter, r *http.Request) {
 	var newBranch entity.Branch
 	bodyBytes, err := ioutil.ReadAll(r.Body)
 
 	if err != nil {
+		log.Println(err)
 		w.WriteHeader(http.StatusBadRequest)
 		return
 	}
 
 	err = json.Unmarshal(bodyBytes, &newBranch)
 	if err != nil {
+		log.Println(err)
 		w.WriteHeader(http.StatusInternalServerError)
 		return
 	}
 
 	if newBranch.BranchID != 0 {
+		log.Println(err)
 		w.WriteHeader(http.StatusBadRequest)
 		return
 	}
@@ -155,6 +168,7 @@ func (*controller) Post(w http.ResponseWriter, r *http.Request) {
 	err = serv.AddBranch(&newBranch)
 
 	if err != nil {
+		log.Println(err)
 		w.WriteHeader(http.StatusInternalServerError)
 		return
 	}
