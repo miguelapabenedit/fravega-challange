@@ -40,12 +40,12 @@ http://localhost:8080/swagger/index.html
  2. Swagger: nunca use swagger con golang por lo que tuve un par de inconvenientes al momento de entender como mostrarlo en el mismo dominio que la api, tuve un par de 
  ncuentros con swagger-go/swagger-go pero termine inclinandome por Swag. Gaste un 40% para poder resolver ese tema( un montón lo se), dado que en .Net es un poco mas sensillo.
  4. Docker y docker-compose: conseguir la información y armar los scripts fue relativamente fácil, pero lo que me genero un dolor de cabeza fue intentar seedear la base de datos 
- en conjunto con el build. La mayoría del tiempo lo gaste intentando resolver el Init 35%
+ en conjunto con el build. La mayoría del tiempo lo gaste intentando resolver el seed 35%
  
  Para el diseño del algoritmo de encontrar el punto mas cercano me base en este [articulo escrito por Jan Philip Matuschek](http://janmatuschek.de/LatitudeLongitudeBoundingCoordinates) 
  y algunas busquedas sobre terminos en wikipedia.
  
  ## Agradecimientos
- Gracias a [Federico Alonso Alomá](https://www.linkedin.com/in/federico-alonso-aloma/) por el challange y el contacto
- Gracias a la persona de IT que dedique tiempo en leer mi codigo este fragmento de código y en especial si tiene feedback sobre el mismo.
- Gracias a [Rodrigo Auche](https://www.linkedin.com/in/rodrigoauche/) que me ayudo con un blockeo que tuve con Docker.
+ 1. Gracias a [Federico Alonso Alomá](https://www.linkedin.com/in/federico-alonso-aloma/) por el challange y el contacto
+ 2. Gracias a la persona de IT que dedique tiempo en leer mi codigo este fragmento de código y en especial si tiene feedback sobre el mismo.
+ 3. Gracias a [Rodrigo Auche](https://www.linkedin.com/in/rodrigoauche/) que me ayudo con un blockeo que tuve con Docker.
