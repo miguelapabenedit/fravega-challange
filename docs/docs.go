@@ -62,19 +62,19 @@ var doc = `{
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "$ref": "#/definitions/entity.Response"
+                            "type": "string"
                         }
                     },
                     "404": {
                         "description": "Bad Request",
                         "schema": {
-                            "$ref": "#/definitions/entity.Response"
+                            "type": "string"
                         }
                     },
                     "500": {
-                        "description": "Internal Server Error",
+                        "description": "Internal Server error",
                         "schema": {
-                            "$ref": "#/definitions/entity.Response"
+                            "type": "string"
                         }
                     }
                 }
@@ -120,19 +120,19 @@ var doc = `{
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "$ref": "#/definitions/entity.Response"
+                            "type": "string"
                         }
                     },
                     "404": {
                         "description": "Bad Request",
                         "schema": {
-                            "$ref": "#/definitions/entity.Response"
+                            "type": "string"
                         }
                     },
                     "500": {
-                        "description": "Internal Server Error",
+                        "description": "Internal Server error",
                         "schema": {
-                            "$ref": "#/definitions/entity.Response"
+                            "type": "string"
                         }
                     }
                 }
@@ -171,19 +171,19 @@ var doc = `{
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "$ref": "#/definitions/entity.Response"
+                            "type": "string"
                         }
                     },
                     "404": {
                         "description": "Bad Request",
                         "schema": {
-                            "$ref": "#/definitions/entity.Response"
+                            "type": "string"
                         }
                     },
                     "500": {
-                        "description": "Internal Server Error",
+                        "description": "Internal Server error",
                         "schema": {
-                            "$ref": "#/definitions/entity.Response"
+                            "type": "string"
                         }
                     }
                 }
@@ -205,14 +205,6 @@ var doc = `{
                 },
                 "longitude": {
                     "type": "number"
-                }
-            }
-        },
-        "entity.Response": {
-            "type": "object",
-            "properties": {
-                "message": {
-                    "type": "string"
                 }
             }
         }

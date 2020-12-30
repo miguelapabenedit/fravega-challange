@@ -11,11 +11,6 @@ definitions:
       longitude:
         type: number
     type: object
-  entity.Response:
-    properties:
-      message:
-        type: string
-    type: object
 host: localhost:8080
 info:
   contact:
@@ -49,15 +44,15 @@ paths:
         "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/entity.Response'
+            type: string
         "404":
           description: Bad Request
           schema:
-            $ref: '#/definitions/entity.Response'
+            type: string
         "500":
-          description: Internal Server Error
+          description: Internal Server error
           schema:
-            $ref: '#/definitions/entity.Response'
+            type: string
       summary: Creates a new branch
       tags:
       - branch
@@ -83,15 +78,15 @@ paths:
         "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/entity.Response'
+            type: string
         "404":
           description: Bad Request
           schema:
-            $ref: '#/definitions/entity.Response'
+            type: string
         "500":
-          description: Internal Server Error
+          description: Internal Server error
           schema:
-            $ref: '#/definitions/entity.Response'
+            type: string
       summary: Get a branch
       tags:
       - branch
@@ -123,15 +118,15 @@ paths:
         "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/entity.Response'
+            type: string
         "404":
           description: Bad Request
           schema:
-            $ref: '#/definitions/entity.Response'
+            type: string
         "500":
-          description: Internal Server Error
+          description: Internal Server error
           schema:
-            $ref: '#/definitions/entity.Response'
+            type: string
       summary: Get the nearest deliver
       tags:
       - branch

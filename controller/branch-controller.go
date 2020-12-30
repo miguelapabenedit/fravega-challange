@@ -30,8 +30,8 @@ func NewBranchController(service service.Service) Controller {
 // @Produce  json
 // @Param id path int true "Branch ID"
 // @Success 200 {object} entity.Branch
-// @Failure 400,404 {object} http.Response
-// @Failure 500 {object} http.Response
+// @Failure 400,404 {string} string "Bad Request"
+// @Failure 500 {string} string "Internal Server error"
 // @Router /branch/{id} [get]
 func (*controller) Get(w http.ResponseWriter, r *http.Request) {
 	urlPathSegment := strings.Split(r.URL.Path, "/")
@@ -81,8 +81,8 @@ func (*controller) Get(w http.ResponseWriter, r *http.Request) {
 // @Param latitude query number  true "Latitude"
 // @Param longitude query number  true "Longitude"
 // @Success 200 {object} entity.Branch
-// @Failure 400,404 {object} http.Response
-// @Failure 500 {object} http.Response
+// @Failure 400,404 {string} string "Bad Request"
+// @Failure 500 {string} string "Internal Server error"
 // @Router /branch/getNearestDeliver [get]
 func (*controller) GetNearestDeliver(w http.ResponseWriter, r *http.Request) {
 	latitudeForm := r.FormValue("latitude")
@@ -139,8 +139,8 @@ func (*controller) GetNearestDeliver(w http.ResponseWriter, r *http.Request) {
 // @Produce  json
 // @Param branch body entity.Branch true "Branch"
 // @Success 200 {object} entity.Branch
-// @Failure 400,404 {object} http.Response
-// @Failure 500 {object} http.Response
+// @Failure 400,404 {string} string "Bad Request"
+// @Failure 500 {string} string "Internal Server error"
 // @Router /branch [post]
 func (*controller) Post(w http.ResponseWriter, r *http.Request) {
 	var newBranch entity.Branch
