@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"os"
 
 	_ "github.com/denisenkom/go-mssqldb"
 	"github.com/gorilla/mux"
@@ -23,6 +24,7 @@ var (
 	branchRepo       infrastructure.Repository = infrastructure.NewSQLRepository()
 	branchservice    service.Service           = service.NewBranchService(branchRepo)
 	branchController controller.Controller     = controller.NewBranchController(branchservice)
+	port             string                    = os.Getenv("API_PORT")
 )
 
 // @title Fravega Challange Deliver API
@@ -30,7 +32,7 @@ var (
 // @description This api serves for creation and retrieve of branches and other functionalities
 // @contact.name API Support
 // @contact.email miguell.beneditt@gmail.com
-// @host localhost:5000
+// @host localhost:8080
 // @BasePath /api
 func main() {
 	r := mux.NewRouter()
@@ -39,7 +41,6 @@ func main() {
 	r.HandleFunc(fmt.Sprintf("%s%s", apiBasePath, branchBasePath), branchController.Post).Methods("POST")
 	r.PathPrefix("/swagger").Handler(httpSwagger.WrapHandler)
 
-	port := ":5000"
-	log.Println("Server listening on port", port)
+	log.Println("Server listening on port", os.Getenv("API_DOCKER_PORT"))
 	log.Fatalln(http.ListenAndServe(port, r))
 }

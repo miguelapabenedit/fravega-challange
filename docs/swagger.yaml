@@ -11,7 +11,7 @@ definitions:
       longitude:
         type: number
     type: object
-host: localhost:5000
+host: localhost:8080
 info:
   contact:
     email: miguell.beneditt@gmail.com
@@ -42,11 +42,17 @@ paths:
           schema:
             $ref: '#/definitions/entity.Branch'
         "400":
-          description: ""
+          description: Bad Request
+          schema:
+            type: string
         "404":
-          description: ""
+          description: Bad Request
+          schema:
+            type: string
         "500":
-          description: ""
+          description: Internal Server error
+          schema:
+            type: string
       summary: Creates a new branch
       tags:
       - branch
@@ -70,11 +76,17 @@ paths:
           schema:
             $ref: '#/definitions/entity.Branch'
         "400":
-          description: ""
+          description: Bad Request
+          schema:
+            type: string
         "404":
-          description: ""
+          description: Bad Request
+          schema:
+            type: string
         "500":
-          description: ""
+          description: Internal Server error
+          schema:
+            type: string
       summary: Get a branch
       tags:
       - branch
@@ -104,11 +116,17 @@ paths:
           schema:
             $ref: '#/definitions/entity.Branch'
         "400":
-          description: ""
+          description: Bad Request
+          schema:
+            type: string
         "404":
-          description: ""
+          description: Bad Request
+          schema:
+            type: string
         "500":
-          description: ""
+          description: Internal Server error
+          schema:
+            type: string
       summary: Get the nearest deliver
       tags:
       - branch

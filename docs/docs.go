@@ -60,13 +60,22 @@ var doc = `{
                         }
                     },
                     "400": {
-                        "description": ""
+                        "description": "Bad Request",
+                        "schema": {
+                            "type": "string"
+                        }
                     },
                     "404": {
-                        "description": ""
+                        "description": "Bad Request",
+                        "schema": {
+                            "type": "string"
+                        }
                     },
                     "500": {
-                        "description": ""
+                        "description": "Internal Server error",
+                        "schema": {
+                            "type": "string"
+                        }
                     }
                 }
             }
@@ -109,13 +118,22 @@ var doc = `{
                         }
                     },
                     "400": {
-                        "description": ""
+                        "description": "Bad Request",
+                        "schema": {
+                            "type": "string"
+                        }
                     },
                     "404": {
-                        "description": ""
+                        "description": "Bad Request",
+                        "schema": {
+                            "type": "string"
+                        }
                     },
                     "500": {
-                        "description": ""
+                        "description": "Internal Server error",
+                        "schema": {
+                            "type": "string"
+                        }
                     }
                 }
             }
@@ -151,13 +169,22 @@ var doc = `{
                         }
                     },
                     "400": {
-                        "description": ""
+                        "description": "Bad Request",
+                        "schema": {
+                            "type": "string"
+                        }
                     },
                     "404": {
-                        "description": ""
+                        "description": "Bad Request",
+                        "schema": {
+                            "type": "string"
+                        }
                     },
                     "500": {
-                        "description": ""
+                        "description": "Internal Server error",
+                        "schema": {
+                            "type": "string"
+                        }
                     }
                 }
             }
@@ -196,7 +223,7 @@ type swaggerInfo struct {
 // SwaggerInfo holds exported Swagger Info so clients can modify it
 var SwaggerInfo = swaggerInfo{
 	Version:     "1.0",
-	Host:        "localhost:5000",
+	Host:        "localhost:8080",
 	BasePath:    "/api",
 	Schemes:     []string{},
 	Title:       "Fravega Challange Deliver API",

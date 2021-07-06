@@ -9,7 +9,7 @@
         },
         "version": "1.0"
     },
-    "host": "localhost:5000",
+    "host": "localhost:8080",
     "basePath": "/api",
     "paths": {
         "/branch": {
@@ -45,13 +45,22 @@
                         }
                     },
                     "400": {
-                        "description": ""
+                        "description": "Bad Request",
+                        "schema": {
+                            "type": "string"
+                        }
                     },
                     "404": {
-                        "description": ""
+                        "description": "Bad Request",
+                        "schema": {
+                            "type": "string"
+                        }
                     },
                     "500": {
-                        "description": ""
+                        "description": "Internal Server error",
+                        "schema": {
+                            "type": "string"
+                        }
                     }
                 }
             }
@@ -94,13 +103,22 @@
                         }
                     },
                     "400": {
-                        "description": ""
+                        "description": "Bad Request",
+                        "schema": {
+                            "type": "string"
+                        }
                     },
                     "404": {
-                        "description": ""
+                        "description": "Bad Request",
+                        "schema": {
+                            "type": "string"
+                        }
                     },
                     "500": {
-                        "description": ""
+                        "description": "Internal Server error",
+                        "schema": {
+                            "type": "string"
+                        }
                     }
                 }
             }
@@ -136,13 +154,22 @@
                         }
                     },
                     "400": {
-                        "description": ""
+                        "description": "Bad Request",
+                        "schema": {
+                            "type": "string"
+                        }
                     },
                     "404": {
-                        "description": ""
+                        "description": "Bad Request",
+                        "schema": {
+                            "type": "string"
+                        }
                     },
                     "500": {
-                        "description": ""
+                        "description": "Internal Server error",
+                        "schema": {
+                            "type": "string"
+                        }
                     }
                 }
             }

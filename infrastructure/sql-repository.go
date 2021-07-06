@@ -5,26 +5,33 @@ import (
 	"database/sql"
 	"fmt"
 	"log"
+	"os"
 	"time"
 
 	"github.com/miguelapabenedit/fravega-challange/entity"
 )
 
-var dbConn *sql.DB
-var server = "localhost"
-var port = 1434
-var password = "go123"
-var user = "go"
-var database = "FravegaChallange"
+var (
+	dbConn   *sql.DB
+	server   = os.Getenv("DB_SERVER")
+	port     = os.Getenv("DB_PORT")
+	password = os.Getenv("DB_PASS")
+	user     = os.Getenv("DB_USER")
+	database = os.Getenv("DB_NAME")
+)
 
 type repo struct{}
 
+/*NewSQLRepository constructor that initiates a sql connection
+ */
 func NewSQLRepository() Repository {
 	var err error
-	cs := fmt.Sprintf("server=%s;user id=%s;password=%s;port=%d;database=%s", server, user, password, port, database)
+
+	cs := fmt.Sprintf("server=%s;user id=%s;password=%s;port=%s;database=%s", server, user, password, port, database)
 	dbConn, err = sql.Open("sqlserver", cs)
+
 	if err != nil {
-		log.Fatal(err)
+		log.Println(err)
 	}
 
 	dbConn.SetMaxOpenConns(4)
